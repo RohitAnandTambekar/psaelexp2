@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,tr,td{
+  border: 3px solid black;
+}
+#wrapper {
+    height: 1000px;
+    position: relative;
+}
+#footer{
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   bottom: 0px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+.intro{
+  font-weight: bold;
+  font-size: 20px;
+}
+.heading
+{
+text-align:center;
+padding-bottom:100px;
+}
+.procedure
+{
+font-size:20px;
+}
+.calculation
+{
+font-size:20px;
+}
+button{
+font-size:18px;
+}
+.para
+{
+ font-size:20px;
+}
+.volt
+{
+ font-size:20px;
+}
+body
+{
+ background-color:#e3f6f5;
+}
+
+.maam {
+        display: flex;
+        align-items: center;
+        justify-content: center
+ }
+img {
+        max-width: 100%
+ }
+.maamimag {
+        flex-basis: 40%
+ }
+ .maamtext {
+        font-size: 20px;
+        padding-left: 130px;
+        padding-right: 100px;
+}
+.manas {
+        display: flex;
+        align-items: center;
+        justify-content: center
+ }
+
+.manasimag {
+        flex-basis: 40%
+ }
+ .manastext {
+        font-size: 20px;
+        padding-left: 100px;
+        padding-right: 100px;
+}
+
+.rohit {
+        display: flex;
+        align-items: center;
+        justify-content: center
+ }
+
+.rohitimag {
+        flex-basis: 40%
+ }
+ .rohittext {
+        font-size: 20px;
+        padding-left: 100px;
+        padding-right: 100px;
+}
+#seebuscurr{
+font-size:20px;
+}
+#seelineflows
+{
+font-size:20px;
+}
+#seebusgen,#totalloss{
+font-size:20px;
+}
+
+footer{
+padding-top:100px;
+position:fixed;
+bottom: 0;
+}
+</style>
+</head>
+<body>
+<div class="heading">
+  <img src="https://rvce.edu.in/sites/default/files/logo_0.png">
+  <h1>Virtual Lab for Gauss Seidel method of Load flow analysis</h1>
+</div>
+
+<hr>
+<div class="intro">
+  <p>
+    Developed By:
+  </p>
+  <p>
+      &ensp; Manas M
+  </p>
+  <p>
+      &ensp; Rohit Anand Tambekar
+  </p>
+  <p>
+    Under the guidance of:
+  </p>
+  <p>
+      &ensp; Sushmita Sarkar
+  </p>
+</div>
+<hr>
+<br>
+
+<div class="procedure">
+<p>Procedure:</p>
+<ol>
+  <li>Enter the number of buses for which LFA is to be calculated.</li>
+  <li>The “Done” button is clicked only once.</li>
+  <li>Click on “Create Ybus”. The matrix appears.</li>
+  <li>Enter the Ybus values in the respective matrix position ex: 0+9i or 2-6i.</li>
+  <li>Click the “Done” button.</li>
+  <li>Click on “enter the bus data”. The table will appear and the bus data should be filled.</li>
+  <li>After entering the data click on “Calculate” button and we obtain the values of Voltages, angle,power for different iterations.</li>
+</ol>
+</div>
+<div class="calculation">
+<p>
+Enter the number of lines: <input type="number" id="numlines">
+<button type="button" onclick="myFunction()">Done</button>
+</p>
+<br>
+<button type="button" onclick="createRowsoflinedata()">Create Line data table</button>
+<br>
+<br>
+<table id="dataTable3">
+  <thead>
+    <tr>
+      <th class="header-label">From Bus</th>
+      <th class="header-label">To Bus</th>
+      <th class="header-label">Z</th>
+      <th class="header-label">hlc(y/2)</th>
+      <th class="header-label">a</th>
+    </tr>
+ </thead>
+ <tbody>
+ <tr>
+      <td><input class="linedata" type="number"></td>
+      <td><input class="linedata" type="number"></td>
+      <td><input class="linedata"type="text"></td>
+      <td><input class="linedata" type="text"></td>
+      <td><input class="linedata" type="number"></td>
+</tr>
+
+</tbody>
+</table>
+<br>
+<button type="button" onclick="getlinedataval()">Done</button>
+<br>
+<br>
+<button type="button" onclick="showYbus()">Show Ybus Matrix</button>
+<br>
+<br>
+<table id="ybusprint">
+</table>
+<br>
+<br>
+<button type="button" onclick="createRowsofbusdata()">Create Busdata</button>
+<br>
+<br>
+<table id="dataTable2">
+  <thead>
+    <tr>
+      <th class="header-label">Bus</th>
+      <th class="header-label">Type</th>
+      <th class="header-label">V</th>
+      <th class="header-label">Angle</th>
+      <th class="header-label">G(MW)</th>
+      <th class="header-label">G(MVar)</th>
+      <th class="header-label">L(MW)</th>
+      <th class="header-label">L(MVar)</th>
+      <th class="header-label">Qmin</th>
+      <th class="header-label">Qmax</th>
+    </tr>
+ </thead>
+ <tbody>
+ <tr>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+      <td><input class="busdata" type="number"></td>
+</tr>
+
+</tbody>
+</table>
+<br>
+<button type="button" onclick="getbusdataval()">Done</button>
+<br>
+<br>
+<button type="button" onclick="calculate()">Show voltages</button>
+<br>
+<div id="solution">
+
+</div>
+</div>
+<br>
+<button type="button" onclick="lineflow()">Show bus currents,bus power,line flows</button>
+<br>
+<br>
+<table id='seebuscurr'>
+</table>
+<br>
+<br>
+<table id='seelineflows'>
+</table>
+<br>
+<br>
+<table id='seebusgen'>
+</table>
+<br>
+<div id="totalloss">
+</div>
+<hr>
+<div id="wrapper">
+<div id="footer">
+
+  <div class="maam">
+  <div class="maamimag">
+  <img src="http://www.rvce.edu.in/sites/default/files/DSC_743244.jpg"  width="200" height="200">
+  </div>
+  <div class="maamtext">
+  <p>
+  <b style="font-size:30px">Sushmita Sarkar</b><br><br>
+  Currently working as Assistant Professor at RV College of Engineering,Banglore.Area of interests include Power Systems, Photovoltaic System and Power quality.Has a rich experience of teaching 12+ years and has published various papers in journals and conferences.
+  </p>
+  </div>
+  </div>
+  <br />
+  <div class="manas">
+  <div class="manasimag">
+  <img src="images/manas.jpg" width="200" height="200">
+  </div>
+  <div class="manastext">
+  <p>
+  <b style="font-size:30px">Manas M</b><br><br>
+  Currently a final year  student at RV College of Engineering,Banglore studying Elecrical and Electronics Engineering. Area of interests include Power Systems, Power electronics and VLSI. Hobbies includes travelling and exploring new places.</p>
+  </div>
+  </div>
+  <br>
+  <div class="rohit">
+  <div class="rohitimag">
+  <img src="images/Rohit.jpg" width="200" height="200">
+  </div>
+  <div class="rohittext">
+  <p>
+  <b style="font-size:30px">Rohit Anand Tambekar</b><br><br>
+  Currently a final year  student at RV College of Engineering,Banglore studing Elecrical and Electronics Engineering. Area of interests include Digital Electronics, Programming and CS realted subjects . Hobbies include watching anime and movies.</p>
+  </div>
+  </div>
+</div>
+</div>
+<script>
+
+    // Here the value is stored in new variable x
+    var x;
+    var ybus=[];
+    linedata=[];
+    frombus=[];
+    tobus=[];
+    Z=[];
+    y=[];
+    hlc=[];
+    var nb=0;
+
+    ra=[];
+    var ybusComp=[];
+    var busdata=[];
+    var nbus=0;
+    var nline=0;
+     bus=[];
+     bustype=[];
+     V=[];
+     th=[];
+     GMW=[];
+     GMVAR=[];
+     LMW=[];
+     LMVAR=[];
+     Qmin=[];
+     Qmax=[];
+     P=[];
+     Q=[];
+     Vprev=[];
+    //complex class
+    class ComplexNumber {
+    constructor(real, imag) {
+    this.real = real;
+    this.imag = imag;
+    }
+  }
+  function add(a,b)
+  {
+   res=new ComplexNumber(0,0);
+   res.real=a.real+b.real;
+   res.imag=a.imag+b.imag;
+   return res;
+  }
+  function multiply(a,b) {
+    let real = a.real * b.real - a.imag * b.imag;
+    let imag = a.real * b.imag + a.imag * b.real;
+    return new ComplexNumber(real, imag);
+  }
+  function conjugate(a)
+    {
+    a.imag=-a.imag;
+    return a;
+}
+function subtract(a,b)
+{
+return new ComplexNumber(a.real-b.real,a.imag-b.imag);
+}
+function  divide(a,b) {
+    let denominator = b.real * b.real + b.imag * b.imag;
+    let real = (a.real * b.real + a.imag * b.imag) / denominator;
+    let imag = (a.imag * b.real - a.real * b.imag) / denominator;
+    return new ComplexNumber(real, imag);
+  }
+function magnitude(a) {
+    return Math.sqrt(a.real * a.real + a.imag * a.imag);
+  }
+
+function angle(a) {
+    return Math.atan2(a.imag, a.real);
+  }
+
+    function myFunction() {
+        x = parseInt(document.getElementById("numlines").value);
+        console.log(x);
+    }
+
+    function createRowsoflinedata()
+    {
+     for (let i = 0; i < x-1; i++) {
+              addRowforlinedata('dataTable3');
+         }
+    }
+    function createRowsofYbus(){
+         for (let i = 0; i < x; i++) {
+              addRowforYbus(x,'dataTable1');
+         }
+    }
+
+    function createRowsofbusdata(){
+         for (let i = 0; i < nbus-1; i++) {
+              addRowforbusdata('dataTable2');
+         }
+    }
+
+    function addRowforlinedata(tableID)
+    {
+      var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        //Column 1
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.type = "number";
+        element1.classList.add("linedata");
+        cell1.appendChild(element1);
+        //Column 2
+        var cell2 = row.insertCell(1);
+        var element2 = document.createElement("input");
+        element2.type = "number";
+        element2.classList.add("linedata");
+        cell2.appendChild(element2);
+        //Column 3
+        var cell3 = row.insertCell(2);
+        var element3 = document.createElement("input");
+        element3.type = "text";
+        element3.classList.add("linedata");
+        cell3.appendChild(element3);
+        //Column 4
+        var cell4 = row.insertCell(3);
+        var element4 = document.createElement("input");
+        element4.type = "text";
+        element4.classList.add("linedata");
+        cell4.appendChild(element4);
+        //Column 5
+        var cell5 = row.insertCell(4);
+        var element5 = document.createElement("input");
+        element5.type = "number";
+        element5.classList.add("linedata");
+        cell5.appendChild(element5);
+    }
+
+    function addRowforbusdata(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        //Column 1
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.type = "number";
+        element1.classList.add("busdata");
+        cell1.appendChild(element1);
+        //Column 2
+        var cell2 = row.insertCell(1);
+        var element2 = document.createElement("input");
+        element2.type = "number";
+        element2.classList.add("busdata");
+        cell2.appendChild(element2);
+        //Column 3
+        var cell3 = row.insertCell(2);
+        var element3 = document.createElement("input");
+        element3.type = "number";
+        element3.classList.add("busdata");
+        cell3.appendChild(element3);
+        //Column 4
+        var cell4 = row.insertCell(3);
+        var element4 = document.createElement("input");
+        element4.type = "number";
+        element4.classList.add("busdata");
+        cell4.appendChild(element4);
+        //Column 5
+        var cell5 = row.insertCell(4);
+        var element5 = document.createElement("input");
+        element5.type = "number";
+        element5.classList.add("busdata");
+        cell5.appendChild(element5);
+        //Column 6
+        var cell6 = row.insertCell(5);
+        var element6 = document.createElement("input");
+        element6.type = "number";
+        element6.classList.add("busdata");
+        cell6.appendChild(element6);
+        //Column 7
+        var cell7 = row.insertCell(6);
+        var element7 = document.createElement("input");
+        element7.classList.add("busdata");
+        element7.type = "number";
+        cell7.appendChild(element7);
+        //Column 8
+        var cell8 = row.insertCell(7);
+        var element8 = document.createElement("input");
+        element8.classList.add("busdata");
+        element8.type = "number";
+        cell8.appendChild(element8);
+        //Column 9
+        var cell9 = row.insertCell(8);
+        var element9 = document.createElement("input");
+        element9.type = "number";
+        element9.classList.add("busdata");
+        cell9.appendChild(element9);
+        //Column 10
+        var cell10 = row.insertCell(9);
+        var element10 = document.createElement("input");
+        element10.type = "number";
+        element10.classList.add("busdata");
+        cell10.appendChild(element10);
+    }
+    function addRowforYbus(N,tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        for (let i = 0; i <N; i++) {
+            var cell = row.insertCell(i);
+            var element = document.createElement("input");
+            element.type = "text";
+            element.classList.add("yval");
+            cell.appendChild(element);
+        }
+    }
+    function getlinedataval()
+    {
+     var elemline=document.getElementsByClassName("linedata");
+     var linenames=[];
+
+      for(var i=0;i<elemline.length;++i){
+      linenames.push(elemline[i].value);
+     }
+
+     var c=0;
+     for(var i=0;i<x;++i){
+     dup=[];
+     for(var j=0;j<5;++j){
+     dup.push(linenames[c]);
+     c=c+1;
+     }
+     linedata.push(dup);
+     }
+     console.log(linedata);
+     for(var i=0;i<x;++i)
+    {
+     Z.push(new ComplexNumber(0,0));
+    }
+    for(var i=0;i<x;++i)
+    {
+     hlc.push(new ComplexNumber(0,0));
+    }
+      for(var i=0;i<x;++i)
+     {
+      frombus.push(parseInt(linedata[i][0]));
+      tobus.push(parseInt(linedata[i][1]));
+      complex1=linedata[i][2].split('+');
+      console.log(complex1);
+      Z[i].real=parseFloat(complex1[0]);
+      Z[i].imag=parseFloat(complex1[1].substring(0,complex1[1].length-1));
+      complex2=linedata[i][3].split('+');
+      hlc[i].real=parseFloat(complex2[0]);
+      hlc[i].imag=parseFloat(complex2[1].substring(0,complex2[1].length-1));
+      ra.push(parseFloat(linedata[i][4]));
+     }
+
+     for(var i=0;i<x;++i)
+     {
+      y.push(divide(new ComplexNumber(1,0),Z[i]));
+     }
+     console.log(y);
+     nbus=Math.max(Math.max(...frombus),Math.max(...tobus));
+     nb=nbus;
+     nline=frombus.length;
+     for (var i = 0; i < nbus; ++ i) {
+       newdup=[];
+       for (var j = 0; j <nbus; ++ j) {
+       newdup.push(new ComplexNumber(0,0));
+  }
+  ybusComp.push(newdup);
+  }
+   for(var k=0;k<nline;++k)
+   {
+    p=frombus[k]-1;
+    q=tobus[k]-1;
+    y[k]=divide(y[k],new ComplexNumber(ra[k],0));
+    console.log(y[k]);
+    ybusComp[p][p]=add(ybusComp[p][p],add(y[k],add(hlc[k],multiply(new ComplexNumber((1-ra[k])/ra[k],0),y[k]))));
+    ybusComp[q][q]=add(ybusComp[q][q],add(y[k],add(hlc[k],multiply(new ComplexNumber((ra[k]-1),0),y[k]))));
+    ybusComp[p][q]=subtract(ybusComp[p][q],y[k]);
+    ybusComp[q][p]=ybusComp[p][q];
+   }
+     console.log(ybusComp);
+    }
+
+    function showYbus(){
+    var ybusEle=document.getElementById('ybusprint');
+
+    for(var i=0;i<nbus;++i)
+    {
+    let row=ybusEle.insertRow();
+    for(var j=0;j<nbus;++j)
+    {
+    if(ybusComp[i][j].imag<0)
+    {
+     number=ybusComp[i][j].real.toFixed(4)+(ybusComp[i][j].imag.toFixed(4)+'i');
+     }
+     else
+     {
+     number=ybusComp[i][j].real.toFixed(4)+'+'+(ybusComp[i][j].imag.toFixed(4)+'i');
+     }
+     let cell=row.insertCell();
+     let text=document.createTextNode(number);
+     cell.appendChild(text);
+    }
+    }
+    }
+
+ function getbusdataval()
+ {
+       var elembus = document.getElementsByClassName("busdata");
+       var names = [];
+
+       for (var i = 0; i < elembus.length; ++ i) {
+       names.push(elembus[i].value);
+       }
+
+       var count=0;
+       for (var i = 0; i < nb; ++ i) {
+       dup=[];
+       for (var j = 0; j <10; ++ j) {
+       dup.push(parseFloat(names[count]));
+       count=count+1;
+       }
+  busdata.push(dup);
+  }
+   console.log(busdata);
+ }
+
+ function calculate()
+ {
+
+ console.log(nb);
+ console.log(ybus);
+ for (var i = 0; i <nb; ++ i) {
+       bus.push(busdata[i][0]);
+}
+
+for (var i = 0; i <nb; ++ i) {
+       bustype.push(busdata[i][1]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       V.push(new ComplexNumber(busdata[i][2],0));
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       th.push(busdata[i][3]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       GMW.push(busdata[i][4]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       GMVAR.push(busdata[i][5]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       LMW.push(busdata[i][6]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       LMVAR.push(busdata[i][7]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       Qmin.push(busdata[i][8]);
+}
+
+ for (var i = 0; i <nb; ++ i) {
+       Qmax.push(busdata[i][9]);
+}
+
+
+for (var i = 0; i <nb; ++ i) {
+       P.push(GMW[i]-LMW[i]);
+}
+
+
+for (var i = 0; i <nb; ++ i) {
+       Q.push(GMVAR[i]-LMVAR[i]);
+}
+
+
+for(var i=0;i<nb;++i)
+{
+  Vprev[i]=new ComplexNumber(V[i].real,V[i].imag);
+}
+var toler=1;
+var k=1;
+var solutionEle=document.getElementById('solution');
+while(toler>0.001)
+{
+ for(var p=1;p<nb;++p)
+ {
+  sumyv=new ComplexNumber(0,0);
+  for(var q=0;q<nb;++q)
+  {
+   if(p!=q)
+   {
+    sumyv=add(sumyv,multiply(ybusComp[p][q],V[q]));
+   }
+  }
+  if(bustype[p]==2)
+ {
+  dup=new ComplexNumber(0,0);
+  dup=multiply(conjugate(V[p]),add(sumyv,multiply(ybusComp[p][p],V[p])));
+  Q[p]=-dup.imag;
+
+  if(Qmax[p]==0&&Qmin[p]==0)
+  {
+  }
+  else
+  {
+  if(Q[p]>Qmax[p]||Q[p]<Qmin[p])
+  {
+   if(Q[p]<Qmin[p])
+   {
+    Q[p]=Qmin[p];
+    }
+    else
+    {
+     Q[p]=Qmax[p];
+     }
+     bustype[p]=3;
+  }
+  }
+ }
+
+V[p]=multiply(divide(new ComplexNumber(1,0),ybusComp[p][p]),subtract(divide(new ComplexNumber(P[p],-Q[p]),conjugate(V[p])),sumyv));
+
+
+
+if(bustype[p]==2)
+{
+ let real=magnitude(Vprev[p])*Math.cos(angle(V[p]));
+ let imag=magnitude(Vprev[p])*Math.sin(angle(V[p]));
+
+ V[p]=new ComplexNumber(real,imag);
+}
+
+var newpara = document.createElement('p');
+newpara.classList.add("para");
+newpara.innerHTML="The voltages at all buses and Q at pv busses after iteration no "+k;
+solutionEle.appendChild(newpara);
+var newDiv = document.createElement('div');
+if(bustype[p]==3)
+{
+printstr=" V("+(p+1)+")="+magnitude(V[p])+" at "+angle(V[p])*(180/Math.PI)+"deg";
+}
+else
+{
+printstr=" V("+(p+1)+")="+magnitude(V[p])+" at "+angle(V[p])*(180/Math.PI)+"deg, Q("+(p+1)+")="+Q[p];
+}
+newDiv.innerHTML=printstr;
+newDiv.classList.add("volt");
+solutionEle.appendChild(newDiv);
+}
+
+k=k+1;
+var vartar=-1000000;
+for(var i=0;i<nb;++i)
+{
+ let diff=(magnitude(V[i])-magnitude(Vprev[i]));
+ if(diff<0)
+ {
+  diff=-diff;
+ }
+ if(diff>vartar)
+ {
+ vartar=diff;
+ }
+}
+toler=vartar;
+for(var i=0;i<nb;++i)
+{
+  Vprev[i]=new ComplexNumber(V[i].real,V[i].imag);
+}
+}
+}
+
+function lineflow()
+{
+ I=[];
+ SL=[];
+ II=[];
+ SG=[];
+ loss=[];
+ totalloss=new ComplexNumber(0,0);
+ for(var i=0;i<nline;++i)
+ {
+  loss.push(new ComplexNumber(0,0));
+ }
+ console.log(loss);
+ for(var i=0;i<nb;++i)
+ {
+  dup1=[];
+  dup2=[]
+  for(var j=0;j<nb;++j)
+  {
+   dup1.push(new ComplexNumber(0,0));
+   dup2.push(new ComplexNumber(0,0));
+  }
+  II.push(new ComplexNumber(0,0));
+  SG.push(new ComplexNumber(0,0));
+  I.push(dup1);
+  SL.push(dup2);
+  }
+  console.log(I);
+  console.log(SL);
+  console.log(II);
+  console.log(SG);
+
+
+  for(var k=0;k<nline;++k)
+  {
+   p=frombus[k]-1;
+   q=tobus[k]-1;
+   I[p][q]=add(multiply(subtract(V[p],V[q]),y[k]),multiply(V[p],hlc[k]));
+   II[p]=add(II[p],I[p][q]);
+   SL[p][q]=multiply(V[p],conjugate(I[p][q]));
+   SG[p]=add(SG[p],SL[p][q]);
+   I[q][p]=add(multiply(subtract(V[q],V[p]),y[k]),multiply(V[q],hlc[k]));
+   II[q]=add(II[q],I[q][p]);
+   SL[q][p]=multiply(V[q],conjugate(I[q][p]));
+   SG[q]=add(SG[q],SL[q][p]);
+   loss[k]=add(SL[p][q],SL[q][p]);
+   totalloss=add(totalloss,loss[k]);
+  }
+  //bus current printing
+  var buscurr=document.getElementById('seebuscurr');
+  let sen = document.createElement("div");
+  sen.innerHTML="Bus Currents";
+  buscurr.appendChild(sen);
+  let thead = buscurr.createTHead();
+  let row = thead.insertRow();
+  let th1 = document.createElement("th");
+  let text1 = document.createTextNode("BusNo");
+  th1.appendChild(text1);
+  row.appendChild(th1);
+  let th2 = document.createElement("th");
+  let text2 = document.createTextNode("Current");
+  th2.appendChild(text2);
+  row.appendChild(th1);
+  row.appendChild(th2);
+
+  for(var k=0;k<nb;++k)
+  {
+   let row = buscurr.insertRow();
+   let cell1 = row.insertCell();
+   let cell2=row.insertCell();
+   let text1= document.createTextNode((k+1));
+   if(II[k].imag<0)
+   {
+    nstr=II[k].real.toFixed(4)+(II[k].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstr=II[k].real.toFixed(4)+'+'+(II[k].imag.toFixed(4)+'i');
+   }
+   let text2= document.createTextNode(nstr);
+   cell1.appendChild(text1);
+   cell2.appendChild(text2);
+  }
+
+  //lineflows
+  var lineflow=document.getElementById('seelineflows');
+  let sen2 = document.createElement("div");
+  sen2.innerHTML="Line flows";
+  lineflow.appendChild(sen2);
+  let theadnew = lineflow.createTHead();
+  let rownew = theadnew.insertRow();
+  let th1new = document.createElement("th");
+  let text1new = document.createTextNode("From bus");
+  th1new.appendChild(text1new);
+  let th2new = document.createElement("th");
+  let text2new = document.createTextNode("To bus");
+  th2new.appendChild(text2new);
+  let th3new = document.createElement("th");
+  let text3new = document.createTextNode("Lineflows");
+  th3new.appendChild(text3new);
+  let th4new = document.createElement("th");
+  let text4new = document.createTextNode("Lineloss");
+  th4new.appendChild(text4new);
+  rownew.appendChild(th1new);
+  rownew.appendChild(th2new);
+  rownew.appendChild(th3new);
+  rownew.appendChild(th4new);
+
+  for(var k=0;k<nline;++k)
+  {
+   let rowdata1 = lineflow.insertRow();
+   let celldata1 = rowdata1.insertCell();
+   let celldata2=rowdata1.insertCell();
+   let celldata3 = rowdata1.insertCell();
+   let celldata4=rowdata1.insertCell();
+   p=frombus[k];
+   q=tobus[k];
+   let textdata1= document.createTextNode(p);
+   let textdata2= document.createTextNode(q);
+   if(SL[p-1][q-1].imag<0)
+   {
+    nstr1=SL[p-1][q-1].real.toFixed(4)+(SL[p-1][q-1].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstr1=SL[p-1][q-1].real.toFixed(4)+'+'+(SL[p-1][q-1].imag.toFixed(4)+'i');
+   }
+   if(loss[k].imag<0)
+   {
+    nstr2=loss[k].real.toFixed(4)+(loss[k].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstr2=loss[k].real.toFixed(4)+'+'+(loss[k].imag.toFixed(4)+'i');
+   }
+   let textdata3= document.createTextNode(nstr1);
+   let textdata4=document.createTextNode(nstr2);
+   celldata1.appendChild(textdata1);
+   celldata2.appendChild(textdata2);
+   celldata3.appendChild(textdata3);
+   celldata4.appendChild(textdata4);
+
+
+   let rowd2 = lineflow.insertRow();
+   let celld1 = rowd2.insertCell();
+   let celld2=rowd2.insertCell();
+   let celld3 = rowd2.insertCell();
+   let celld4=rowd2.insertCell();
+   q=frombus[k];
+   p=tobus[k];
+   let textd1= document.createTextNode(p);
+   let textd2= document.createTextNode(q);
+   if(SL[p-1][q-1].imag<0)
+   {
+    nstr1=SL[p-1][q-1].real.toFixed(4)+(SL[p-1][q-1].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstr1=SL[p-1][q-1].real.toFixed(4)+'+'+(SL[p-1][q-1].imag.toFixed(4)+'i');
+   }
+   if(loss[k].imag<0)
+   {
+    nstr2=loss[k].real.toFixed(4)+(loss[k].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstr2=loss[k].real.toFixed(4)+'+'+(loss[k].imag.toFixed(4)+'i');
+   }
+   let textd3= document.createTextNode(nstr1);
+   let textd4=document.createTextNode(nstr2);
+   celld1.appendChild(textd1);
+   celld2.appendChild(textd2);
+   celld3.appendChild(textd3);
+   celld4.appendChild(textd4);
+  }
+
+  //bus generation
+  var busgen=document.getElementById('seebusgen');
+  let sent = document.createElement("div");
+  sent.innerHTML="Bus Generations";
+  busgen.appendChild(sent);
+  let theadgen = busgen.createTHead();
+  let rowgen = theadgen.insertRow();
+  let thgen1 = document.createElement("th");
+  let textgen1 = document.createTextNode("BusNo");
+  thgen1.appendChild(textgen1);
+  rowgen.appendChild(thgen1);
+  let thgen2 = document.createElement("th");
+  let textgen2 = document.createTextNode("Current");
+  thgen2.appendChild(textgen2);
+  rowgen.appendChild(thgen1);
+  rowgen.appendChild(thgen2);
+
+  for(var k=0;k<nb;++k)
+  {
+   let rownewgen = busgen.insertRow();
+   let cellg1 = rownewgen.insertCell();
+   let cellg2=rownewgen.insertCell();
+   let textg1= document.createTextNode((k+1));
+   if(SG[k].imag<0)
+   {
+    nstrn=SG[k].real.toFixed(4)+(SG[k].imag.toFixed(4)+'i');
+   }
+   else
+   {
+    nstrn=SG[k].real.toFixed(4)+'+'+(SG[k].imag.toFixed(4)+'i');
+   }
+   let textg2= document.createTextNode(nstrn);
+   cellg1.appendChild(textg1);
+   cellg2.appendChild(textg2);
+  }
+
+  let lossdoc=document.getElementById('totalloss');
+  let tot1=document.createElement("div");
+  tot1.innerHTML="Total losses";
+  let tot2=document.createElement("div");
+  if(totalloss.imag<0)
+  {
+  lossstr=totalloss.real.toFixed(4)+(totalloss.imag.toFixed(4)+'i');
+  }
+  else
+  {
+   lossstr=totalloss.real.toFixed(4)+'+'+(totalloss.imag.toFixed(4)+'i');
+  }
+  tot2.innerHTML=lossstr;
+  lossdoc.appendChild(tot1);
+  lossdoc.appendChild(tot2);
+}
+
+
+
+
+
+</script>
+</body>
+
+</html>
